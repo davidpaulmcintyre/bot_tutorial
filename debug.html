@@ -1,0 +1,53 @@
+<html>
+    <script>
+        const logger = console.log;
+        function start(){
+            const elem = document.getElementById('counter');
+            let count = 0;
+            function increment(){
+                count += 1;
+                elem.innerHTML = count;
+            }
+            setInterval(increment, 1000);
+        }
+        function stopConsole(){
+            // const logger = console.log;
+            function dummy(){
+                logger('Ha ha ha, this doesnt work');
+            }
+            console.log = dummy;
+            console.warn = dummy;
+            console.info = dummy;
+            console.error = dummy;
+            console.debug = dummy;
+        }
+
+        function crashApp(){
+            setInterval(() => {
+                logger('This is really annoying, no?')
+                debugger;
+            }, 0);
+        }
+        document.addEventListener("DOMContentLoaded", function(){
+            start();
+            stopConsole();
+            document.getElementById('btnDebugging').addEventListener('click', crashApp);
+        })
+    </script>
+    <body>
+        <p>
+            This page demonstrates techniques of debug protection. If you open Chrome Devtools (or devtools for any other browser most likely), you will notice the page will stop working, as demonstrated by the failure of the timestamp to increment.
+
+        </p>
+        <p>
+            If you open Chrome devtools, you will notice that none of the console methods (log, warn, info, error, debug) work properly. It's an obnoxious speedbump.
+        </p>
+        <p>
+            If you hit the button below, you will notice that this page becomes unusable if you have devtools open. Can you think of a countermeasure to this tactic? For an evasive countermeasure, hover over this <span title="The debugger is not hit if devtools is un-docked from the browser window. Devtools has to be undocked before the page loads."><a href="void">hint</a></span>.
+        </p>
+        <div id="counter">
+            0
+        </div>
+        <button id="btnDebugging">Crash</button>
+    </body>
+</html>

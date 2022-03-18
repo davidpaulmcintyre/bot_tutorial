@@ -1,5 +1,5 @@
 # Bot Tutorial
-This is a tutorial for beginners on bot detection and countermeasures that can be taken by hackers to evade detection. It is a fascinating and neverending competition in writing better code than your adversary.
+This is a tutorial for beginners on bot detection and countermeasures that can be taken by hackers to evade detection. Bots vs bot detection is a fascinating and neverending competition in writing better code than your adversary.
 
 ## What are bots?
 Bots are automation software that simulates human interaction with a browser. Common tools are phantomJs, selenium, puppeteer, and playwright.
@@ -12,7 +12,7 @@ There are several reasons why hackers use bots to target a website. The most com
 * Credential stuffing. A bot can keep guessing username/password combinations until it finds a valid combination. Hackers may use brute force for credential stuffing, or they may use credentials harvest from other websites to increase their success rates.
 * Fake users on social media. Bots can be used to create fake users on twitter or facebook, and a bot network can be used to generate fake traffic around a particular issue or page.  
 
-Scraping and buying the latest Yeezys are fairly benign and probably not even illegal, but credential stuffing for the purposes of account takeover is much worse and almost uncertainly illegal. Please use my techniques for learning purposes, not to hurt others, ok? 
+Scraping and buying the latest Yeezys are fairly benign forms of hacking and probably not even illegal (note: I am not a lawyer), but credential stuffing for the purposes of account takeover is much worse and almost uncertainly illegal. Please use my techniques for learning purposes, not to hurt others, ok? 
 
 ### Bots vs Obfuscation
 There are several ways that we can minimize the damage done by bots. One is to obfuscate our javascript code that runs in the browser. Our database and code that runs in the backend are safer from hackers, but on the front-end hackers can view our code just by hitting F12 or opening Chrome DevTools. If hackers can read our code, then it's easier for them to design a bot to impersonate a human interacting with our website. 
@@ -34,16 +34,30 @@ Here's some techniques used to obfuscate javascript code:
 Numbers can also be coerced to letters, so the following snippet returns <code>fail</code>  
 <code>var x = (![]+[])[+[]]+(![]+[])[+!+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]];
 console.log('x = ', x); // 'fail'
-</code>  
-To play around with this more, check out <a href="http://www.jsfuck.com/">JSFuck</a>. This technique discourages the noob trying to gain an understanding of how the code works, but it can be countered by replacing a complicated expression with its static value. 
+</code>   
+To learn more about the bizarre possibilities of type coercion, check out <a href="http://www.jsfuck.com/">JSFuck</a>.  
 
-* Control flow flattening. This technique takes all the control flow blocks in a script (loops, conditionals, function calls) and combines them into a single "flat" switch statement.
+* String Transformations. Similar to type coercion, we can obfuscate the static strings in our code by breaking the string's characters into an array, then shuffling, rotating, and replacing each character value with a convoluted sequence of function calls. You can also encode letters as numbers or hexadecimal values. Much like type coercion, making your code confusing like this discourages the noob trying to gain an understanding of how the code works, but it can be countered by replacing a complicated expression with its static value that is returned at the end of all that misdirection. 
+
+* Control flow flattening. This technique takes all the control flow blocks in a script (loops, conditionals, function calls) and combines them into a single "flat" switch statement, and the switch statement controls the application flow based on the parameters, and the switch statement runs in almost an endless loop.
 * Indirect function calls.  
 * Debug protection. To hack a site, hackers need to gather some intelligence on how the site works. They might start by opening Chrome Devtools, inserting some breakpoints, and writing some console.log statements.  
-So what if we don't let them do that? We can rename the console methods (log, info, warn, error). And we can also choose to make the app nonfunctional if we detect that Chrome Devtools is open. <a href="./debug.html" target="_blank">See a demo of these obnoxious techniques.</a> 
+So what if we don't let them do that? We can rename the console methods (log, info, warn, error). And we can also choose to make the app nonfunctional if we detect that Chrome Devtools is open. <a href="./debug.html" target="_blank">See a demo of these obnoxious techniques.</a>  
+** Dead code injection. We can also make it difficult for hackers to gain an understanding of our code by inserting "dead code" which exists only to confuse the reader. The dead code is a garble of loops and conditionals which can have only one result; it creates the illusion of variation when the code is really static.
 * Integrity checks. Once hackers gain some understanding of a website's front-end code, they might want to start modifying the code to gain further understanding. To stop this, we create a digital signature of our code, and occasionally recreate the digital signature of the current state of the code, and if the signatures don't match, we know we're the target of a hacker. Lots of video games use this technique for DRM to prevent fortnite users from using aimbots and other cheats.  
 
-Naturally, all of these techniques can be combined. If a script is obfuscated with the first 3 of these techniques, it will look like an ungodly mess that is impossible to read. You can experiment with some of these techniques by pasting code snippets at the following demo sites:
+Naturally, all of these techniques can be combined. If a script is obfuscated with the first 3 of these techniques, it will look like an ungodly mess that is impossible to read. Using one of the playgrounds below, you can see how to transform:
+<code>
+function hi() {
+  console.log("Hello World!");
+}
+hi();
+</code>
+into the following gibberish, which will nonetheless behave exactly the same as the snippet snippet when executed by the browser
+<code>
+function _0x1b4d(_0x40bb76,_0x730e14){var _0x5dac50=_0x5dac();return _0x1b4d=function(_0x1b4d7c,_0x1c0795){_0x1b4d7c=_0x1b4d7c-0x143;var _0x1433fc=_0x5dac50[_0x1b4d7c];return _0x1433fc;},_0x1b4d(_0x40bb76,_0x730e14);}(function(_0x3e0ab2,_0x40ea88){var _0x5df60f=_0x1b4d,_0x2646e1=_0x3e0ab2();while(!![]){try{var _0x5f3e9c=parseInt(_0x5df60f(0x149))/0x1*(-parseInt(_0x5df60f(0x145))/0x2)+-parseInt(_0x5df60f(0x147))/0x3+-parseInt(_0x5df60f(0x14b))/0x4*(parseInt(_0x5df60f(0x143))/0x5)+-parseInt(_0x5df60f(0x146))/0x6+-parseInt(_0x5df60f(0x14a))/0x7+parseInt(_0x5df60f(0x14c))/0x8+parseInt(_0x5df60f(0x148))/0x9;if(_0x5f3e9c===_0x40ea88)break;else _0x2646e1['push'](_0x2646e1['shift']());}catch(_0x27c4bd){_0x2646e1['push'](_0x2646e1['shift']());}}}(_0x5dac,0x25531));function _0x5dac(){var _0x2586ae=['443925RifyEn','8016588bEOmRR','1633hrUojm','485450bVjVRe','2804ftOLEl','407552qKCyKX','2035HMuPTJ','Hello\x20World!','334cZrqmN','80712cpQhqR'];_0x5dac=function(){return _0x2586ae;};return _0x5dac();}function hi(){var _0xdd1bc9=_0x1b4d;console['log'](_0xdd1bc9(0x144));}hi();
+</code>  
+You can experiment with some of these techniques by pasting code snippets at the following demo sites:
 * <a href="https://obfuscator.io/">JavaScript Obfuscator Tool</a>
 * <a href="https://www.preemptive.com/products/jsdefender/online-javascript-obfuscator-demo/">JSDefender Demo</a>  
 

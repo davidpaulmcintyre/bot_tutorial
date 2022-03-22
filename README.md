@@ -48,7 +48,7 @@ To learn more about the bizarre possibilities of type coercion, check out <a hre
 * Control flow flattening. This technique takes all the control flow blocks in a script (loops, conditionals, function calls) and combines them into a single "flat" switch statement, and the switch statement controls the application flow based on the parameters, and the switch statement runs in almost an endless loop.
 
 * Debug protection. To hack a site, hackers need to gather some intelligence on how the site works. They might start by opening Chrome Devtools, inserting some breakpoints, and writing some console.log statements.  
-So what if we don't let them do that? We can rename the console methods (log, info, warn, error). And we can also choose to make the app nonfunctional with "code traps" if we detect that Chrome Devtools is open. I created a demo of these obnoxious techniques at <a href="./debug.html" target="_blank">, and <a href="https://js-antidebug.github.io">U Can't Debug This</a> is a more comprehensive demo of debugger detection.</a> Debug protection is problematic because there are perfectly legitimate reasons to debug a website, and might make it harder for developers to debug their own website in production.
+So what if we don't let them do that? We can rename the console methods (log, info, warn, error). And we can also choose to make the app nonfunctional with "code traps" if we detect that Chrome Devtools is open. I created a demo of these obnoxious techniques at <a href="./debug.html" target="_blank">./debug.html</a>, and <a href="https://js-antidebug.github.io">U Can't Debug This</a> is a more comprehensive demo of debugger detection.</a> Debug protection is problematic because there are perfectly legitimate reasons to debug a website, and might make it harder for developers to debug their own website in production.
 * Dead code injection. We can also make it difficult for hackers to gain an understanding of our code by inserting "dead code" which exists only to confuse the reader. The dead code is a garble of loops and conditionals which can have only one result; it creates the illusion of variation when the code is really static.  
 * Canvas fingerprinting. Canvas fingerprinting relies on the minute differences in how each computer's GPU renders elements on the screen. The fingerprint is obtained by using javascript to draw a simple screen on a canvas element. The pixels are serialized using <code>toDataURL</code> and sent to the server. This fingerprint is highly unique and shared with few other users. However, browsers such as <a href="https://github.com/brave/brave-browser">Brave</a> and browser extensions from <a href="https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg?hl=en">Duck Duck Go</a> make fingerprinting more difficult if not impossible by introducing random noise into the <code>toDataURL</code> serialization.
 * Hardware/Software fingerprinting. Computers and mobile devices have very complex configurations of hardware and software. This complexity makes each device very distinct, and very few devices share the same hw/sw fingerprint. Check a fingerprint of your computer at <a href="https://coveryourtracks.eff.org/">Cover Your Tracks</a>, a site created by the EFF to demonstrate the dangers of this kind of fingerprinting. When I obtained a fingerprint of my brand new MacBook Pro, to which I had done zero customization or installations, I was shocked that only 10 other computers out of 50,000 shared the same fingerprint as mine. Currently my MacBook has a totally unique fingerprint out of 60,000 recent tests. This kind of fingerprinting can obviously be used for nefarious purposes to track users for advertising purposes, regardless of if they're browsing incognito. A fingerprint can also be used to identify multiple requests from the same user and which might be camouflaged across different IPs thru a vpn.
@@ -58,10 +58,10 @@ function hi() {
   console.log("Hello World!");
 }
 hi();
-</code>  
+</code>   
 into the following gibberish, which will nonetheless behave exactly the same as the snippet snippet when executed by the browser  
 <code>
-function _0x1b4d(_0x40bb76,_0x730e14){var _0x5dac50=_0x5dac();return _0x1b4d=function(_0x1b4d7c,_0x1c0795){_0x1b4d7c=_0x1b4d7c-0x143;var _0x1433fc=_0x5dac50[_0x1b4d7c];return _0x1433fc;},_0x1b4d(_0x40bb76,_0x730e14);}(function(_0x3e0ab2,_0x40ea88){var _0x5df60f=_0x1b4d,_0x2646e1=_0x3e0ab2();while(!![]){try{var _0x5f3e9c=parseInt(_0x5df60f(0x149))/0x1*(-parseInt(_0x5df60f(0x145))/0x2)+-parseInt(_0x5df60f(0x147))/0x3+-parseInt(_0x5df60f(0x14b))/0x4*(parseInt(_0x5df60f(0x143))/0x5)+-parseInt(_0x5df60f(0x146))/0x6+-parseInt(_0x5df60f(0x14a))/0x7+parseInt(_0x5df60f(0x14c))/0x8+parseInt(_0x5df60f(0x148))/0x9;if(_0x5f3e9c===_0x40ea88)break;else _0x2646e1['push'](_0x2646e1['shift']());}catch(_0x27c4bd){_0x2646e1['push'](_0x2646e1['shift']());}}}(_0x5dac,0x25531));function _0x5dac(){var _0x2586ae=['443925RifyEn','8016588bEOmRR','1633hrUojm','485450bVjVRe','2804ftOLEl','407552qKCyKX','2035HMuPTJ','Hello\x20World!','334cZrqmN','80712cpQhqR'];_0x5dac=function(){return _0x2586ae;};return _0x5dac();}function hi(){var _0xdd1bc9=_0x1b4d;console['log'](_0xdd1bc9(0x144));}hi();
+    function _0x1b4d(_0x40bb76,_0x730e14){var _0x5dac50=_0x5dac();return _0x1b4d=function(_0x1b4d7c,_0x1c0795){_0x1b4d7c=_0x1b4d7c-0x143;var _0x1433fc=_0x5dac50[_0x1b4d7c];return _0x1433fc;},_0x1b4d(_0x40bb76,_0x730e14);}(function(_0x3e0ab2,_0x40ea88){var _0x5df60f=_0x1b4d,_0x2646e1=_0x3e0ab2();while(!![]){try{var _0x5f3e9c=parseInt(_0x5df60f(0x149))/0x1*(-parseInt(_0x5df60f(0x145))/0x2)+-parseInt(_0x5df60f(0x147))/0x3+-parseInt(_0x5df60f(0x14b))/0x4*(parseInt(_0x5df60f(0x143))/0x5)+-parseInt(_0x5df60f(0x146))/0x6+-parseInt(_0x5df60f(0x14a))/0x7+parseInt(_0x5df60f(0x14c))/0x8+parseInt(_0x5df60f(0x148))/0x9;if(_0x5f3e9c===_0x40ea88)break;else _0x2646e1['push'](_0x2646e1['shift']());}catch(_0x27c4bd){_0x2646e1['push'](_0x2646e1['shift']());}}}(_0x5dac,0x25531));function _0x5dac(){var _0x2586ae=['443925RifyEn','8016588bEOmRR','1633hrUojm','485450bVjVRe','2804ftOLEl','407552qKCyKX','2035HMuPTJ','Hello\x20World!','334cZrqmN','80712cpQhqR'];_0x5dac=function(){return _0x2586ae;};return _0x5dac();}function hi(){var _0xdd1bc9=_0x1b4d;console['log'](_0xdd1bc9(0x144));}hi();
 </code>  
 You can experiment with some of these techniques by pasting code snippets at the following demo sites:
 * <a href="https://obfuscator.io/" target="_blank">JavaScript Obfuscator Tool</a>
@@ -81,18 +81,18 @@ Now that we have some familiarity with obfuscation, let's examine what code we'r
 ## Tutorial: How to Detect a Bot
 The following commands will start a crude server and webpage, and is a test environment for you to "hack" the website with a bot.
 <code> 
-$ cd bot_tutorial/server
-$ npm install
-$ npm run start
-</code> 
+$ cd bot_tutorial/server  
+$ npm install  
+$ npm run start  
+</code>  
 The server is now running, protected by the bot detector. You can navigate to http://localhost:3000 in your browser and see the simple homepage. 
 The server application has a number of different endpoints, each with varying defenses against bots. Each time you click a button, you send a POST request to the server, which will respond with a classification of the user as either a bot or human. If you are clicking the buttons in a browser with your human hands, you should be properly classified as a human.  
 The <code>bot</code> directory contains a script that uses Selenium to navigate to each of these routes. Selenium is like a robot that can open webpages and simulate button clicks executed by humans. Selenium is a great tool for integration testing; you can use it to test hundreds of webpages across multiple browsers and browser versions. But it can also be used as a bot to execute thousands of requests to purchase highly coveted sneakers before others have a chance to buy. Selenium supports lots of different languages, but our Selenium client uses javascript. 
-To start the Selenium client:
+To start the Selenium client:  
 <code>
-$ cd ../bot (if you are in the server directory)
-$ npm install
-$ npm run start
+$ cd ../bot (if you are in the server directory)  
+$ npm install  
+$ npm run start  
 </code>  
 If you get an error such as the one below: 
 <code>

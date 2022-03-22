@@ -2,7 +2,7 @@
 This is a tutorial for beginners on bot detection and countermeasures that can be taken by hackers to evade detection. Bots vs bot detection is a fascinating and neverending competition in writing better code than your adversary.
 
 # Demo
-To run the applications in this repo, you can download and install the files in this repo. You should clone this repo if you want to run a bot and bot detector locally. Some of the mini-tutorials in this repo require a server to be running, while others can be demonstrated just by opening the <a href="./debug.html" target="_blank">debug</a> html page from the filesystem. 
+To run the applications in this repo, you can download and install the files in this repo. You should clone this repo if you want to run a bot and bot detector locally. Some of the mini-tutorials in this repo require a server to be running, while others can be demonstrated just by opening the <a href="./debug.html" target="_blank">debug</a> html page from the filesystem.  
 <code>
 $ git clone git@github.com:davidpaulmcintyre/bot_tutorial.git 
 </code>
@@ -44,7 +44,7 @@ To learn more about the bizarre possibilities of type coercion, check out <a hre
 
 * String Transformations. Similar to type coercion, we can obfuscate the static strings in our code by breaking the string's characters into an array, then shuffling, rotating, and replacing each character value with a convoluted sequence of function calls. You can also encode letters as numbers or hexadecimal values. Much like type coercion, making your code confusing like this discourages the noob trying to gain an understanding of how the code works, but it can be countered by replacing a complicated expression with its static value that is returned at the end of all that misdirection. 
 
-* Indirect function calls. Normally you would call a function with something like <code>foo.bar()</a>. But string transformations can also be used to hide function names and which function is being called. Given that <code>foo.bar()</a> can also be called as <code>foo["bar"]()</code> or  
+* Indirect function calls. Normally you would call a function with something like <code>foo.bar()</code>. But string transformations can also be used to hide function names and which function is being called. Given that <code>foo.bar()</code> can also be called as <code>foo["bar"]()</code> or  
 <code>const name = "bar";  
 foo[name]()  
 </code>

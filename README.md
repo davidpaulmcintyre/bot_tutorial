@@ -39,31 +39,27 @@ Here's some techniques used to obfuscate javascript code:
 Numbers can also be coerced to letters, so the following snippet returns <code>fail</code>  
 <code>var x = (![]+[])[+[]]+(![]+[])[+!+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]];
 console.log('x = ', x); // 'fail'
-</code>   
+</code>    
 To learn more about the bizarre possibilities of type coercion, check out <a href="http://www.jsfuck.com/" target="_blank">JSFuck</a>.  
 
 * String Transformations. Similar to type coercion, we can obfuscate the static strings in our code by breaking the string's characters into an array, then shuffling, rotating, and replacing each character value with a convoluted sequence of function calls. You can also encode letters as numbers or hexadecimal values. Much like type coercion, making your code confusing like this discourages the noob trying to gain an understanding of how the code works, but it can be countered by replacing a complicated expression with its static value that is returned at the end of all that misdirection. 
 
-* Indirect function calls. Normally you would call a function with something like <code>foo.bar()</code>. But string transformations can also be used to hide function names and which function is being called. Given that <code>foo.bar()</code> can also be called as <code>foo["bar"]()</code> or  
-<code>const name = "bar";  
-foo[name]()  
-</code>
-the <code>name</code> variable can be split up into separate characters or the result of a rat's nest of function calls.  
+* Indirect function calls. Normally you would call a function with something like <code>foo.bar()</code>. But string transformations can also be used to hide function names and which function is being called. Given that <code>foo.bar()</code> can also be called as foo["bar"]() or const name = "bar"; foo[name], the <code>name</code> variable can be split up into separate characters or the result of a rat's nest of function calls.  
 * Control flow flattening. This technique takes all the control flow blocks in a script (loops, conditionals, function calls) and combines them into a single "flat" switch statement, and the switch statement controls the application flow based on the parameters, and the switch statement runs in almost an endless loop.
 
 * Debug protection. To hack a site, hackers need to gather some intelligence on how the site works. They might start by opening Chrome Devtools, inserting some breakpoints, and writing some console.log statements.  
 So what if we don't let them do that? We can rename the console methods (log, info, warn, error). And we can also choose to make the app nonfunctional with "code traps" if we detect that Chrome Devtools is open. See a <a href="./debug.html" target="_blank"> of these obnoxious techniques, and <a href="https://js-antidebug.github.io">U Can't Debug This</a> is a more comprehensive demo of debugger detection.</a> Debug protection is problematic because there are perfectly legitimate reasons to debug a website, and might make it harder for developers to debug their own website in production.
 ** Dead code injection. We can also make it difficult for hackers to gain an understanding of our code by inserting "dead code" which exists only to confuse the reader. The dead code is a garble of loops and conditionals which can have only one result; it creates the illusion of variation when the code is really static.  
-** Canvas fingerprinting. Canvas fingerprinting relies on the minute differences in how each computer's GPU renders elements on the screen. The fingerprint is obtained by using javascript to draw a simple screen on a canvas element. The pixels are serialized using <code>toDataURL</code> and sent to the server. This fingerprint is highly unique and shared with few other users. However, browsers such as <a href="https://github.com/brave/brave-browser">Brave</a> and browser extensions from <a href="https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg?hl=en">Duck Duck Go</a> make fingerprinting more difficult if not impossible by introducing random noise into the <code>toDataURL</code> serialization.
-** Hardware/Software fingerprinting. Computers and mobile devices have very complex configurations of hardware and software. This complexity makes each device very distinct, and very few devices share the same hw/sw fingerprint. Check a fingerprint of your computer at <a href="https://coveryourtracks.eff.org/">Cover Your Tracks</a>, a site created by the EFF to demonstrate the dangers of this kind of fingerprinting. When I obtained a fingerprint of my brand new MacBook Pro, to which I had done zero customization or installations, I was shocked that only 10 other computers out of 50,000 shared the same fingerprint as mine. Currently my MacBook has a totally unique fingerprint out of 60,000 recent tests. This kind of fingerprinting can obviously be used for nefarious purposes to track users for advertising purposes, regardless of if they're browsing incognito. A fingerprint can also be used to identify multiple requests from the same user and which might be camouflaged across different IPs thru a vpn.
-Naturally, all of these techniques can be combined. If a script is obfuscated with the first 3 of these techniques, it will look like an ungodly mess that is impossible to read. Using one of the playgrounds below, you can see how to transform:
+* Canvas fingerprinting. Canvas fingerprinting relies on the minute differences in how each computer's GPU renders elements on the screen. The fingerprint is obtained by using javascript to draw a simple screen on a canvas element. The pixels are serialized using <code>toDataURL</code> and sent to the server. This fingerprint is highly unique and shared with few other users. However, browsers such as <a href="https://github.com/brave/brave-browser">Brave</a> and browser extensions from <a href="https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg?hl=en">Duck Duck Go</a> make fingerprinting more difficult if not impossible by introducing random noise into the <code>toDataURL</code> serialization.
+* Hardware/Software fingerprinting. Computers and mobile devices have very complex configurations of hardware and software. This complexity makes each device very distinct, and very few devices share the same hw/sw fingerprint. Check a fingerprint of your computer at <a href="https://coveryourtracks.eff.org/">Cover Your Tracks</a>, a site created by the EFF to demonstrate the dangers of this kind of fingerprinting. When I obtained a fingerprint of my brand new MacBook Pro, to which I had done zero customization or installations, I was shocked that only 10 other computers out of 50,000 shared the same fingerprint as mine. Currently my MacBook has a totally unique fingerprint out of 60,000 recent tests. This kind of fingerprinting can obviously be used for nefarious purposes to track users for advertising purposes, regardless of if they're browsing incognito. A fingerprint can also be used to identify multiple requests from the same user and which might be camouflaged across different IPs thru a vpn.
+Naturally, all of these techniques can be combined. If a script is obfuscated with the first 3 of these techniques, it will look like an ungodly mess that is impossible to read. Using one of the playgrounds below, you can see how to transform:  
 <code>
 function hi() {
   console.log("Hello World!");
 }
 hi();
-</code>
-into the following gibberish, which will nonetheless behave exactly the same as the snippet snippet when executed by the browser
+</code>  
+into the following gibberish, which will nonetheless behave exactly the same as the snippet snippet when executed by the browser  
 <code>
 function _0x1b4d(_0x40bb76,_0x730e14){var _0x5dac50=_0x5dac();return _0x1b4d=function(_0x1b4d7c,_0x1c0795){_0x1b4d7c=_0x1b4d7c-0x143;var _0x1433fc=_0x5dac50[_0x1b4d7c];return _0x1433fc;},_0x1b4d(_0x40bb76,_0x730e14);}(function(_0x3e0ab2,_0x40ea88){var _0x5df60f=_0x1b4d,_0x2646e1=_0x3e0ab2();while(!![]){try{var _0x5f3e9c=parseInt(_0x5df60f(0x149))/0x1*(-parseInt(_0x5df60f(0x145))/0x2)+-parseInt(_0x5df60f(0x147))/0x3+-parseInt(_0x5df60f(0x14b))/0x4*(parseInt(_0x5df60f(0x143))/0x5)+-parseInt(_0x5df60f(0x146))/0x6+-parseInt(_0x5df60f(0x14a))/0x7+parseInt(_0x5df60f(0x14c))/0x8+parseInt(_0x5df60f(0x148))/0x9;if(_0x5f3e9c===_0x40ea88)break;else _0x2646e1['push'](_0x2646e1['shift']());}catch(_0x27c4bd){_0x2646e1['push'](_0x2646e1['shift']());}}}(_0x5dac,0x25531));function _0x5dac(){var _0x2586ae=['443925RifyEn','8016588bEOmRR','1633hrUojm','485450bVjVRe','2804ftOLEl','407552qKCyKX','2035HMuPTJ','Hello\x20World!','334cZrqmN','80712cpQhqR'];_0x5dac=function(){return _0x2586ae;};return _0x5dac();}function hi(){var _0xdd1bc9=_0x1b4d;console['log'](_0xdd1bc9(0x144));}hi();
 </code>  
@@ -71,7 +67,7 @@ You can experiment with some of these techniques by pasting code snippets at the
 * <a href="https://obfuscator.io/" target="_blank">JavaScript Obfuscator Tool</a>
 * <a href="https://www.preemptive.com/products/jsdefender/online-javascript-obfuscator-demo/" target="_blank">JSDefender Demo</a>  
 
-** How to deobfuscate
+# How to deobfuscate
 Alas, when faced with such seemingly impossible to understand code, you may start by using regular expressions and eval statements to simplify the code. An alternative is to recompile it using an abstract syntax tree (AST). An AST is a hierarchical representation of a script or block of code. When a compiler takes source code and turns it into a binary executable, it first parses the source code and then builds an AST. Similarly, when webpack uses babel to transpile javascript from ES6 to ES5 so it can be backwards compatible, it builds an AST. An excellent tool is <a href="https://astexplorer.net/" target="_blank">AST Explorer</a>. An advanced deobfuscation technique is to build a custom babel plugin that reverses all of the above techniques. This task takes alot of work and is beyond an intro tutorial. But it is a valuable learning exercise that would teach you about how a language works and how compilers or interpreters work.
 
 ## Why bother?
@@ -82,7 +78,7 @@ The contest between obfuscating and de-obfuscating code is a long-running game w
 
 Now that we have some familiarity with obfuscation, let's examine what code we're interesting in obfuscating.
 
-# How to Detect a Bot
+## Tutorial: How to Detect a Bot
 The following commands will start a crude server and webpage, and is a test environment for you to "hack" the website with a bot.
 <code> 
 $ cd bot_tutorial/server
@@ -109,10 +105,3 @@ To start the bot, run:
 $ npm run start
 </code>
 This command should execute the client.js script, which launches Selenium. Upon loading, Selenium navigates to http://localhost:3000 and clicks the first button. This event triggers a POST, which would generally be something meaningful within the website, but in our case it simply sends the value of navigator.webdriver to the server. The simplest means of detecting selenium is to check the <code>navigator.webdriver</code>, which will be undefined for humans browsing with chrome (you can check this in your console), but true for the Selenium bots. To evade this detection, some Stack Overflow users suggest that <a href="https://stackoverflow.com/questions/33225947/can-a-website-detect-when-you-are-using-selenium-with-chromedriver">you can edit the chromedriver that you just downloaded</a>. Other authors suggest that you can <a href="https://piprogramming.org/articles/How-to-make-Selenium-undetectable-and-stealth--7-Ways-to-hide-your-Bot-Automation-from-Detection-0000000017.html">modify the Selenium startup options to remove the webdriver flag</a>.
-
-canvas fingerprinting
-
-
-
-
-

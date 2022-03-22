@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Bot or Not</title>
+        <script src="./index.js" defer ></script>
+        <style>
+            body {
+                padding: 100px 200px
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to the Bot Detection Page</h1>
+        <p>Click each of the buttons to test if the server classifies you as a human or a bot</p>
+        <button id="btnFirst" onclick="handleFirst()">Test navigator.webdriver</button>
+        <button id="btnSecond" onclick="handleSecond()">Second</button>
+        <p>
+            You are currently classified as: 
+            <b><span id="classification">Unclassified</span></b>
+        </p>
+        <p id="counterMeasures"></p>
+    </body>
+</html>
